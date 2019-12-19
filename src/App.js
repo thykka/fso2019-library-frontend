@@ -40,6 +40,20 @@ mutation createBook(
   }
 }`;
 
+const EDIT_AUTHOR_BORN = gql`
+mutation editAuthorBorn(
+  $name: String!,
+  $born: Int!
+) {
+  editAuthor(
+    name: $name,
+    setBornTo: $born
+  ) {
+    name, born, id
+  }
+}
+`;
+
 const App = () => {
   const [page, setPage] = useState('authors')
 
@@ -53,7 +67,16 @@ const App = () => {
       <ApolloConsumer>
         { client =>(<>
           <Query query={ALL_AUTHORS}>{ result =>
-            <Authors show={page === 'authors'} result={result} client={client} />
+            <Mutation
+              mutation={EDIT_AUTHOR_BORN}
+              refetchQueries={[{ query: ALL_AUTHORS }]}>
+                { editAuthorBorn =>
+                  <Authors show={page === 'authors'}
+                    editAuthorBorn={editAuthorBorn}
+                    result={result}
+                    client={client} />
+                }
+            </Mutation>
           }</Query>
 
           <Query query={ALL_BOOKS}>{ result =>
