@@ -9,7 +9,9 @@ const Authors = ({ show, result, editAuthorBorn }) => {
       <div>Loading authors...</div>
     );
   }
-  const authors = result.data.allAuthors || [];
+  const authors = (
+    result.data && result.data.allAuthors
+  ) || [];
 
   const border = {
     borderLeft: '1px solid',

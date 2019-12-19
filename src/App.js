@@ -7,14 +7,17 @@ import { Query, ApolloConsumer, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 const ALL_AUTHORS = gql`{
-  allAuthors { name, born, bookCount, id }
+  allAuthors { name, born, id }
 }`;
 
 const ALL_BOOKS = gql`{
   allBooks {
     title,
     published,
-    author,
+    author {
+      name,
+      born
+    },
     genres,
     id
   }
