@@ -1,11 +1,14 @@
 import React from 'react'
 
-const Books = (props) => {
-  if (!props.show) {
-    return null
+const Books = ({show, result}) => {
+  if (!show) {
+    return null;
+  }
+  if(result.loading) {
+    return (<div>Loading books...</div>);
   }
 
-  const books = []
+  const books = result.data.allBooks || [];
 
   return (
     <div>
