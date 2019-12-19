@@ -132,13 +132,12 @@ const EditBorn = ({ author, editAuthorBorn })=> {
       />
       <span style={noInputStyle}>{author.born}</span>
       <button style={buttonStyle}
-        onClick={e => editing ? handleSubmit(author.id) : handleEdit(author.id) }>
-        {
-          editing
-            ? <span style={iconStyle} role="img" aria-label="edit">&#x1f58b;</span>
-            : <span style={iconStyle} role="img" aria-label="save">&#x1f4be;</span>
-        }
-      </button>
+        onClick={e => editing ? handleSubmit(author.id) : handleEdit(author.id) }
+      >{
+        editing
+          ? <span style={iconStyle} role="img" aria-label="edit">&#x1f58b;</span>
+          : <span style={iconStyle} role="img" aria-label="save">&#x1f4be;</span>
+      }</button>
     </>
   )
 };
