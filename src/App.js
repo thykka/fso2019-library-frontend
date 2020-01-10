@@ -28,17 +28,19 @@ mutation createBook(
   $title: String!,
   $author: String!,
   $published: Int,
-  $genres: [String!]
+  $genres: [String!]!
 ) {
   addBook(
     title: $title,
-    author: $author,
+    authorName: $author,
     published: $published,
     genres: $genres
   ) {
     title,
     published,
-    author,
+    author {
+      name
+    },
     id
   }
 }`;
@@ -91,10 +93,10 @@ const App = () => {
       <Mutation
         mutation={CREATE_BOOK}
         refetchQueries={[{ query: ALL_BOOKS }, { query: ALL_AUTHORS }]}>
-        { addBook => (
+        { createBook => (
             <NewBook
               show={page === 'add'}
-              addBook={addBook}
+              createBook={createBook}
             />
         ) }
       </Mutation>
