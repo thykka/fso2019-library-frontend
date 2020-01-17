@@ -16,6 +16,7 @@ const NewBook = (props) => {
 
     await props.createBook({
       variables: {
+        token: props.token,
         title, author, genres,
         published: parseInt(published, 10) || null
       }

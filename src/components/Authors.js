@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Authors = ({ show, result, editAuthorBorn }) => {
+const Authors = ({ token, show, result, editAuthorBorn }) => {
   if (!show) {
     return null
   }
@@ -35,7 +35,7 @@ const Authors = ({ show, result, editAuthorBorn }) => {
           {authors.map(a =>
             <tr key={a.id}>
               <td>{a.name}</td>
-              <td style={border}><EditBorn author={a} editAuthorBorn={editAuthorBorn} /></td>
+              <td style={border}><EditBorn token={token} author={a} editAuthorBorn={editAuthorBorn} /></td>
               <td style={border}>{a.bookCount}</td>
             </tr>
           )}
@@ -46,7 +46,7 @@ const Authors = ({ show, result, editAuthorBorn }) => {
   )
 }
 
-const EditBorn = ({ author, editAuthorBorn })=> {
+const EditBorn = ({ token, author, editAuthorBorn })=> {
   const [editing, setEditing] = useState(false);
   const [newBirthYear, setNewBirthYear] = useState(author.born || '');
 
@@ -58,6 +58,7 @@ const EditBorn = ({ author, editAuthorBorn })=> {
       if(born.toString() === newBirthYear) {
         await editAuthorBorn({
           variables: {
+            token: token,
             name: author.name,
             born: parseInt(newBirthYear, 10)
           }
